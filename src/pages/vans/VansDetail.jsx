@@ -9,7 +9,7 @@ export default function VansDetail() {
     fetch(`/api/vans/${vanId}`)
       .then((data) => data.json())
       .then((data) => setVan(data.vans));
-  }, []);
+  }, [vanId]);
 
   return (
     <div className="van-detail-container">

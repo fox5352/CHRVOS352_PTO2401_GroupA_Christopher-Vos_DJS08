@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link, Outlet, useParams } from "react-router-dom";
+import { Link, NavLink, Outlet, useParams } from "react-router-dom";
 
 function HostVansDetail() {
   const { vanId } = useParams();
   const [currentVan, setCurrentVan] = useState(null);
+
+  const style = {
+    fontWeight: "bold",
+    textDecoration: "underline",
+    color: "#161616",
+  };
 
   useEffect(() => {
     fetch(`/api/host/vans/${vanId}`)
@@ -33,9 +39,32 @@ function HostVansDetail() {
               <h4>${currentVan.price}/day</h4>
             </div>
           </div>
+          <nav className="host-van-detail-nav">
+            <NavLink
+              to="."
+              end
+              style={({ isActive }) => (isActive ? style : null)}
+            >
+              Details
+            </NavLink>
+
+            <NavLink
+              to="pricing"
+              style={({ isActive }) => (isActive ? style : null)}
+            >
+              Pricing
+            </NavLink>
+
+            <NavLink
+              to="photos"
+              style={({ isActive }) => (isActive ? style : null)}
+            >
+              Photos
+            </NavLink>
+          </nav>
+          <Outlet />
         </div>
       </section>
-      <Outlet />
     </>
   );
 }

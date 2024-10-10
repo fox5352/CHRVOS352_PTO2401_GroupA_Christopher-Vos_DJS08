@@ -6,7 +6,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Vans from "./pages/Vans";
 
-import "../server";
+import "../server.js";
 
 function App() {
   return (

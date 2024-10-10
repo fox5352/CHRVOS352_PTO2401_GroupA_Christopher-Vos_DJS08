@@ -10,11 +10,7 @@ function HostLayout() {
   return (
     <>
       <nav className="host-nav">
-        <NavLink
-          to="/host"
-          style={({ isActive }) => (isActive ? style : null)}
-          end
-        >
+        <NavLink to="." style={({ isActive }) => (isActive ? style : null)} end>
           Dashboard
         </NavLink>
         <NavLink

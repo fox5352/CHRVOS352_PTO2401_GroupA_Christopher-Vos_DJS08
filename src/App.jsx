@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  Outlet,
+} from "react-router-dom";
 
 import RootLayout from "./components/RootLayout.jsx";
 import Home from "./pages/home/Home.jsx";
@@ -33,16 +39,18 @@ function App() {
 
           <Route path="login" element={<Login />} />
 
-          <Route path="host" element={<HostLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="income" element={<Income />} />
-            <Route path="reviews" element={<Reviews />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="host" element={<HostLayout />}>
+              <Route index element={<Dashboard />} />
+              <Route path="income" element={<Income />} />
+              <Route path="reviews" element={<Reviews />} />
 
-            <Route path="vans" element={<HostVans />} />
-            <Route path="vans/:vanId" element={<HostVansDetail />}>
-              <Route index element={<HostVanInfo />} />
-              <Route path="pricing" element={<HostVanPricing />} />
-              <Route path="photos" element={<HostVanPhotos />} />
+              <Route path="vans" element={<HostVans />} />
+              <Route path="vans/:vanId" element={<HostVansDetail />}>
+                <Route index element={<HostVanInfo />} />
+                <Route path="pricing" element={<HostVanPricing />} />
+                <Route path="photos" element={<HostVanPhotos />} />
+              </Route>
             </Route>
           </Route>
           <Route path="*" element={<NotFound />} />
@@ -50,6 +58,17 @@ function App() {
       </Routes>
     </BrowserRouter>
   );
+}
+
+function ProtectedRoute() {
+  const auth = false;
+
+  if (!auth) {
+    // Navigate("/login");
+    return <Navigate to="/login" state={{ message: "You must login first" }} />;
+  }
+
+  return <Outlet />;
 }
 
 export default App;

@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
   Outlet,
+  useLocation,
 } from "react-router-dom";
 
 import RootLayout from "./components/RootLayout.jsx";
@@ -61,11 +62,20 @@ function App() {
 }
 
 function ProtectedRoute() {
-  const auth = false;
+  const location = useLocation();
+  const isLoggedIn = localStorage.getItem("loggedin");
 
-  if (!auth) {
+  console.log();
+
+  if (!isLoggedIn) {
     // Navigate("/login");
-    return <Navigate to="/login" state={{ message: "You must login first" }} />;
+    return (
+      <Navigate
+        relative={true}
+        to="/login"
+        state={{ message: "You must login first", url: location.pathname }}
+      />
+    );
   }
 
   return <Outlet />;

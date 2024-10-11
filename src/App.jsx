@@ -65,8 +65,6 @@ function ProtectedRoute() {
   const location = useLocation();
   const isLoggedIn = localStorage.getItem("loggedin");
 
-  console.log();
-
   if (!isLoggedIn) {
     // Navigate("/login");
     return (

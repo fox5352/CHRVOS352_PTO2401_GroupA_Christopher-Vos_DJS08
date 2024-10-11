@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
+import { getVans } from "../../../api";
 
 export default function VansDetail() {
   const { vanId } = useParams();
@@ -7,9 +8,7 @@ export default function VansDetail() {
   const { state } = useLocation();
 
   useEffect(() => {
-    fetch(`/api/vans/${vanId}`)
-      .then((data) => data.json())
-      .then((data) => setVan(data.vans));
+    getVans(vanId).then((data) => setVan(data));
   }, [vanId]);
 
   const search = state.search ? `?${state.search}` : "";

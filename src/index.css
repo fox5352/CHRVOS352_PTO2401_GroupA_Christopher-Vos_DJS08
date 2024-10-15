@@ -225,8 +225,11 @@ footer {
 }
 
 .van-tile img {
-  max-height: auto;
-  max-width: 630px;
+  max-width: 540px;
+  height: auto;
+  width: 100%;
+  object-fit: fill;
+
   border-radius: 5px;
 }
 
@@ -314,8 +317,13 @@ i[class*="van-type-"] {
 }
 
 .van-detail img {
-  max-height: 800px;
-  max-width: 1090px;
+  max-height: 900px;
+
+  height: auto;
+  width: auto;
+  object-fit: contain;
+  object-position: left;
+
   border-radius: 5px;
   margin-block: 47px;
 }
